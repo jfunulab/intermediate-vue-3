@@ -12,21 +12,22 @@ import EventService from '../services/EventService';
 
 export default {
   name: 'EventList',
+  props: ['page'],
   components: {
     EventCard,
   },
   data() {
     return {
-      events: null
+      events: null,
     };
   },
   created() {
-    EventService.getEvents()
+    EventService.getEvents(2, this.page)
       .then((response) => {
         this.events = response.data;
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error);
       });
   },
 };
